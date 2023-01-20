@@ -12,6 +12,9 @@ const __dirname = dirname(__filename);
 // set app view engine to EJS
 app.set('view engine', 'ejs');
 
+// setup url encoded parsing for form submission
+app.use(express.urlencoded({extended: true}));
+
 app.get('/', (req, res) => {
   const date = new Date();
   let day = '';
@@ -27,6 +30,10 @@ app.get('/', (req, res) => {
 
   // pass day to list.ejs to render
   res.render('list', {day: day});
+});
+
+app.post('/', (req, res) => {
+  // code
 });
 
 app.listen(port, (err) => {
