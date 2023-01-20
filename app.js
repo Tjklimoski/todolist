@@ -14,15 +14,14 @@ app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
   const today = new Date();
+  let day = '';
 
   // .getDat() returns a number coresponding to the day
   // 6 === Saturday, 0 === Sunday
   if (today.getDay() === 6 || today.getDay() === 0) {
-    res.send('Yay, it\'s the weekend!');
+    day = 'weekend';
   } else {
-    res.write('<h1>This is so sad!</h1>');
-    res.write('<p>You have to go to work</p>');
-    res.end();
+    day = 'weekday';
   }
 });
 
