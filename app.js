@@ -16,10 +16,13 @@ app.get('/', (req, res) => {
   const date = new Date();
   let day = '';
 
-  // .getDay() returns a number coresponding to the day
-  // 6 === Saturday, 0 === Sunday
-  let daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  day = daysOfTheWeek[date.getDay()];
+  const options = {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long'
+  };
+
+  day = date.toLocaleDateString(undefined, options);
 
   // pass day to list.ejs to render
   res.render('list', {day: day});
