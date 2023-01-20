@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
   }
 
   // pass day to list.ejs to render
-  res.render('list', {typeOfDay: day});
+  res.render('list', {day: day});
 });
 
 app.listen(port, (err) => {
