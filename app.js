@@ -23,6 +23,9 @@ app.get('/', (req, res) => {
   } else {
     day = 'weekday';
   }
+
+  // pass day to list.ejs to render
+  res.render('list', {typeOfDay: day});
 });
 
 app.listen(port, (err) => {
