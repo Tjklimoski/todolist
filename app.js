@@ -13,16 +13,13 @@ const __dirname = dirname(__filename);
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  const today = new Date();
+  const date = new Date();
   let day = '';
 
-  // .getDat() returns a number coresponding to the day
+  // .getDay() returns a number coresponding to the day
   // 6 === Saturday, 0 === Sunday
-  if (today.getDay() === 6 || today.getDay() === 0) {
-    day = 'weekend';
-  } else {
-    day = 'weekday';
-  }
+  let daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  day = daysOfTheWeek[date.getDay()];
 
   // pass day to list.ejs to render
   res.render('list', {day: day});
