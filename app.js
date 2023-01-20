@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // set global variable
-let newTask = '';
+let tasks = [];
 
 // set app view engine to EJS
 app.set('view engine', 'ejs');
@@ -32,11 +32,12 @@ app.get('/', (req, res) => {
   day = date.toLocaleDateString(undefined, options);
 
   // pass day to list.ejs to render
-  res.render('list', {day: day, newTask: newTask});
+  res.render('list', {day: day, tasks: tasks});
 });
 
 app.post('/', (req, res) => {
-  newTask = req.body.task;
+  let task = req.body.task;
+  tasks.push(task);
   res.redirect('/');
 });
 
