@@ -9,6 +9,9 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// set app view engine to EJS
+app.set('view engine', 'ejs');
+
 app.get('/', (req, res) => {
   const today = new Date();
 
