@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
     month: 'long'
   };
 
+  // first argument is locale, undefined will use the users default locale
   day = date.toLocaleDateString(undefined, options);
 
   // pass day to list.ejs to render
