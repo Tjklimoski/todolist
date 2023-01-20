@@ -10,7 +10,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 app.get('/', (req, res) => {
-  res.sendFile('/index.html', {root: __dirname});
+  const today = new Date();
+
+  if (today.getDay() === 6 || today.getDay() === 0) {
+    res.send('Yay, it\'s the weekend!');
+  } else {
+    res.send('Aww, you have to go to work :(');
+  }
 });
 
 app.listen(port, (err) => {
