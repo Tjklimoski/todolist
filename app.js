@@ -23,7 +23,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
   const date = new Date();
-  let day = '';
+  let title = '';
 
   const options = {
     weekday: 'long',
@@ -32,10 +32,10 @@ app.get('/', (req, res) => {
   };
 
   // first argument is locale, undefined will use the users default locale
-  day = date.toLocaleDateString(undefined, options);
+  title = date.toLocaleDateString(undefined, options);
 
-  // pass day to list.ejs to render
-  res.render('list', {day: day, tasks: tasks});
+  // pass title to list.ejs to render
+  res.render('list', {title: title, tasks: tasks});
 });
 
 app.post('/', (req, res) => {
