@@ -23,17 +23,6 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
-  const date = new Date();
-  let title = '';
-
-  const options = {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long'
-  };
-
-  // first argument is locale, undefined will use the users default locale
-  title = date.toLocaleDateString(undefined, options);
 
   // pass title to list.ejs to render
   res.render('list', {title: title, tasks: tasks});
