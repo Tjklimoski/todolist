@@ -7,10 +7,11 @@
 html {
   --primary-color: #a683e3;
   background:
-    linear-gradient(50deg, var(--primary-color) 50%, #e4e9fd 50%),
+    linear-gradient(45deg, var(--primary-color) 50%, #e4e9fd 50%),
     #e4e9fd;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   font-family: 'Raleway', Arial, Sans-serif;
-  height: 100vh;
 }
 
 h1 {
@@ -91,7 +92,7 @@ input[type="text"]:focus {
 
 ::placeholder {
   color: grey;
-  opacity: 1;
+  opacity: .8;
 }
 
 footer {
