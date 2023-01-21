@@ -10,10 +10,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // set global variable
-let tasks = [];
+let tasks = ['task 1', 'task 2', 'task 3'];
 
 // set app view engine to EJS
 app.set('view engine', 'ejs');
+
+// setup static directory
+app.use(express.static('public'));
 
 // setup url encoded parsing for form submission
 app.use(express.urlencoded({extended: true}));
