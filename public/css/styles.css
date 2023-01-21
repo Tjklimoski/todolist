@@ -1,0 +1,7 @@
+html {
+  background:
+    linear-gradient(50deg, #a683e3 50%, #e4e9fd 50%),
+    #e4e9fd;
+  font-family: 'Raleway', Arial, Sans-serif;
+  height: 100vh;
+}
