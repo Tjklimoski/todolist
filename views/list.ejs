@@ -18,18 +18,29 @@
 
 <body>
   
-  <h1><%= day %></h1>
+  <div id="heading" class="box">
+    <h1>
+      <%= day %>
+    </h1>
+  </div>
 
-  <ul>
-    <% for (let i = 0; i < tasks.length; i++) { %>
-      <li><%= tasks[i] %></li>
+  <div class="box">
+    <% for (let i=0; i < tasks.length; i++) { %>
+      <div class="item">
+        <input type="checkbox">
+        <p>
+          <%= tasks[i] %>
+        </p>
+      </div>
     <% } %>
-  </ul>
 
-  <form method="post">
-    <input type="text" name="task" placeholder="What's your next task?" required>
-    <button type="submit">+</button>
-  </form>
+    <form class="item" method="post">
+      <input type="text" name="task" placeholder="What's your next task?" required>
+      <button type="submit">+</button>
+    </form>
+  </div>
+
+
 
 </body>
 
