@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // import date module
-import date from './date.js';
+import * as date from './date.js';
 
 // create __filename and __dirname variables
 import { dirname } from 'path';
@@ -19,20 +19,24 @@ let workTasks = [];
 // set app view engine to EJS
 app.set('view engine', 'ejs');
 
+
 // setup static directory
 app.use(express.static('public'));
+
 
 // setup url encoded parsing for form submission
 app.use(express.urlencoded({extended: true}));
 
+
 app.get('/', (req, res) => {
 
   // call the date.js module's default export with the name date()
-  let title = date();
+  let title = date.getDay();
 
   // pass title to list.ejs to render
   res.render('list', {title: title, tasks: tasks});
 });
+
 
 app.get('/work', (req, res) => {
   let title = 'Work List';
@@ -40,9 +44,11 @@ app.get('/work', (req, res) => {
   res.render('list', {title: title, tasks: workTasks});
 });
 
+
 app.get('/about', (req, res) => {
   res.render('about');
 })
+
 
 app.post('/', (req, res) => {
   let task = req.body.task;
@@ -50,11 +56,13 @@ app.post('/', (req, res) => {
   res.redirect('/');
 });
 
+
 app.post('/work', (req, res) => {
   let task = req.body.task;
   workTasks.push(task);
   res.redirect('/work');
 });
+
 
 app.listen(port, (err) => {
   if (err) {

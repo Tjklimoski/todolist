@@ -1,7 +1,7 @@
 
+const date = new Date();
+
 function dateAsString() {
-  const date = new Date();
-  let day = '';
 
   const options = {
     weekday: 'long',
@@ -10,9 +10,21 @@ function dateAsString() {
   };
 
   // first argument is locale, undefined will use the users default locale
-  day = date.toLocaleDateString(undefined, options);
+  let dateString = date.toLocaleDateString(undefined, options);
+
+  return dateString;
+}
+
+function getDay() {
+
+  const options = {
+    weekday: 'long'
+  };
+
+  // first argument is locale, undefined will use the users' default locale
+  let day = date.toLocaleDateString(undefined, options);
 
   return day;
 }
 
-export { dateAsString as default };
+export { dateAsString as getDate, getDay, dateAsString as default };
