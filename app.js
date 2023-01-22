@@ -3,6 +3,9 @@ import express from 'express';
 const app = express();
 const port = process.env.PORT || 3000;
 
+// import date module
+import date from './date.js';
+
 // create __filename and __dirname variables
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';

@@ -14,3 +14,5 @@ function dateAsString() {
 
   return day;
 }
+
+export { dateAsString as default };
