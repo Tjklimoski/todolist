@@ -8,7 +8,7 @@ function dateAsString() {
     day: 'numeric',
     month: 'long'
   };
-
+ 
   // first argument is locale, undefined will use the users default locale
   return date.toLocaleDateString(undefined, options);
 }

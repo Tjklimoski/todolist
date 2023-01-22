@@ -13,8 +13,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // set global variable
-let tasks = ['task 1', 'task 2', 'task 3'];
-let workTasks = [];
+const tasks = [];
+const workTasks = [];
 
 // set app view engine to EJS
 app.set('view engine', 'ejs');
@@ -31,7 +31,7 @@ app.use(express.urlencoded({extended: true}));
 app.get('/', (req, res) => {
 
   // call the date.js module's default export with the name date()
-  let title = date.getDay();
+  let title = date.getDate();
 
   // pass title to list.ejs to render
   res.render('list', {title: title, tasks: tasks});
