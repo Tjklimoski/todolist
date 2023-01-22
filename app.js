@@ -27,7 +27,8 @@ app.use(express.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
 
-  // Need to get title - date as string
+  // call the date.js module's default export with the name date()
+  let title = date();
 
   // pass title to list.ejs to render
   res.render('list', {title: title, tasks: tasks});
