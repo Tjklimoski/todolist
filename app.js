@@ -6,6 +6,9 @@ const port = process.env.PORT || 3000;
 // import date module
 import * as date from './date.js';
 
+// import Mongoose
+import mongoose from 'mongoose';
+
 // create __filename and __dirname variables
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
