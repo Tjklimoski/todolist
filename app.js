@@ -15,18 +15,20 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-
-
 // set app view engine to EJS
 app.set('view engine', 'ejs');
-
 
 // setup static directory
 app.use(express.static('public'));
 
-
 // setup url encoded parsing for form submission
 app.use(express.urlencoded({extended: true}));
+
+// Setup mongoose connection to database
+//mongoose depreication warning
+mongoose.set('strictQuery', false);
+const todolistDB = mongoose.createConnection('mongodb://127.0.0.1:27017/todolistDB');
+
 
 
 app.get('/', (req, res) => {
