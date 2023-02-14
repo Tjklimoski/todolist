@@ -45,14 +45,15 @@ const task1 = new Task({
   task: 'Do taxes'
 });
 
-const task2 = new Task ({
+const task2 = new Task({
   task: 'Clean bathroom'
 });
 
-const task3 = new Task ({
+const task3 = new Task({
   task: 'Play Hogwarts Legacy'
 });
 
+const defaultTasks = [task1, task2, task3];
 
 app.get('/', (req, res) => {
 
