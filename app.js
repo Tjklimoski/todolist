@@ -37,6 +37,11 @@ const taskSchema = new mongoose.Schema({
   }
 });
 
+// Create mongoose model for tasks
+const Task = todolistDB.model('Task', taskSchema);
+
+
+
 app.get('/', (req, res) => {
 
   // call the date.js module's default export with the name date()
