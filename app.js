@@ -55,9 +55,10 @@ const task3 = new Task({
 
 const defaultTasks = [task1, task2, task3];
 
-Task.create(defaultTasks, (err) => {
-  err ? console.warn(err) : console.log('succesfully updated tasks collection');
-});
+// No longer want to add the documents to the database again
+// Task.create(defaultTasks, (err) => {
+//   err ? console.warn(err) : console.log('succesfully updated tasks collection');
+// });
 
 app.get('/', (req, res) => {
 
