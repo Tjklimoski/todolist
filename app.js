@@ -55,6 +55,10 @@ const task3 = new Task({
 
 const defaultTasks = [task1, task2, task3];
 
+Task.create(defaultTasks, (err) => {
+  err ? console.warn(err) : console.log('succesfully updated tasks collection');
+});
+
 app.get('/', (req, res) => {
 
   // call the date.js module's default export with the name date()
