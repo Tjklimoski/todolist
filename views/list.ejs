@@ -7,14 +7,14 @@
   </div>
 
   <div class="box">
-    <% for (let i=0; i < tasks.length; i++) { %>
+    <% tasks.forEach( task => { %>
       <div class="item">
         <input type="checkbox">
         <p>
-          <%= tasks[i].task %>
+          <%= task.task %>
         </p>
       </div>
-    <% } %>
+    <% }); %>
 
     <form class="item" method="post">
       <input type="text" name="task" placeholder="What's your next task?" autocomplete="off" required>
