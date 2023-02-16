@@ -65,8 +65,12 @@ app.get('/', (req, res) => {
   // call the date.js module's default export with the name date()
   let title = date.getDate();
 
-  // pass title to list.ejs to render
-  res.render('list', {title: title, tasks: tasks});
+  // fetch task documents from todolistDB
+  Task.find({}, (err, docs) => {
+    // pass title and docs to list.ejs to render
+    res.render('list', {title: title, tasks: docs});
+  });
+
 });
 
 
