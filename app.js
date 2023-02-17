@@ -102,8 +102,12 @@ app.post('/', (req, res) => {
 });
 
 
-app.post('/deleteItem', (req, res) => {
-  console.log(req.body);
+app.post('/deleteItem', async (req, res) => {
+  const checkedTaskId = req.body.checkbox;
+
+  await Task.findByIdAndRemove(checkedTaskId);
+
+  res.redirect('/');
 });
 
 
