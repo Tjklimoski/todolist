@@ -123,12 +123,25 @@ app.post('/deleteItem', async (req, res) => {
 app.get('/:listName', (req, res) => {
   const listName = req.params.listName;
 
-  const list = new List({
-    name: listName,
-    tasks: defaultTasks
+  List.findOne({name: listName}, (err, doc) => {
+    if (!err) {
+      if (!doc) {
+        const list = new List({
+          name: listName,
+          tasks: defaultTasks
+        });
+
+        list.save();
+
+        res.redirect(`/${listName}`);
+      } else {
+        const tasks = doc.tasks;
+        const title = doc.name;
+        res.render('list', {title: title, tasks: tasks});
+      }
+    }
   });
 
-  list.save();
 });
 
 
