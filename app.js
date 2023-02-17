@@ -79,16 +79,16 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/work', (req, res) => {
-  let title = 'Work List';
+// app.get('/work', (req, res) => {
+//   let title = 'Work List';
 
-  res.render('list', {title: title, tasks: workTasks});
-});
+//   res.render('list', {title: title, tasks: workTasks});
+// });
 
 
-app.get('/about', (req, res) => {
-  res.render('about');
-})
+// app.get('/about', (req, res) => {
+//   res.render('about');
+// })
 
 
 app.post('/', (req, res) => {
@@ -111,11 +111,16 @@ app.post('/deleteItem', async (req, res) => {
 });
 
 
-app.post('/work', (req, res) => {
-  let task = req.body.task;
-  workTasks.push(task);
-  res.redirect('/work');
+app.get('/:listName', (req, res) => {
+  console.log(req.params.listName);
 });
+
+
+// app.post('/work', (req, res) => {
+//   let task = req.body.task;
+//   workTasks.push(task);
+//   res.redirect('/work');
+// });
 
 
 app.listen(port, (err) => {
