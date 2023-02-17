@@ -37,6 +37,12 @@ const taskSchema = new mongoose.Schema({
   }
 });
 
+// Create schema for custom lists
+const listSchema = new mongoose.Schema({
+  name: String,
+  tasks: [taskSchema]
+});
+
 // Create mongoose model for tasks
 const Task = todolistDB.model('Task', taskSchema);
 
@@ -112,7 +118,7 @@ app.post('/deleteItem', async (req, res) => {
 
 
 app.get('/:listName', (req, res) => {
-  console.log(req.params.listName);
+  const listName = req.params.listName;
 });
 
 
