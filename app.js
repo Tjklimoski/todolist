@@ -46,6 +46,9 @@ const listSchema = new mongoose.Schema({
 // Create mongoose model for tasks
 const Task = todolistDB.model('Task', taskSchema);
 
+// Create model for lists
+const List = todolistDB.model('List', listSchema);
+
 // create 3 new task documents
 const task1 = new Task({
   task: 'Do taxes'
