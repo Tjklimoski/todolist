@@ -92,8 +92,12 @@ app.get('/about', (req, res) => {
 
 
 app.post('/', (req, res) => {
-  let task = req.body.task;
-  tasks.push(task);
+  const newUserTask = new Task({
+    task: req.body.task
+  });
+  
+  newUserTask.save();
+
   res.redirect('/');
 });
 
