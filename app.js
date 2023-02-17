@@ -122,6 +122,13 @@ app.post('/deleteItem', async (req, res) => {
 
 app.get('/:listName', (req, res) => {
   const listName = req.params.listName;
+
+  const list = new List({
+    name: listName,
+    tasks: defaultTasks
+  });
+
+  list.save();
 });
 
 
