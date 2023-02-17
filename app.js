@@ -102,6 +102,11 @@ app.post('/', (req, res) => {
 });
 
 
+app.post('/deleteItem', (req, res) => {
+  console.log(req.body);
+});
+
+
 app.post('/work', (req, res) => {
   let task = req.body.task;
   workTasks.push(task);
