@@ -88,18 +88,6 @@ app.get('/', (req, res) => {
 });
 
 
-// app.get('/work', (req, res) => {
-//   let title = 'Work List';
-
-//   res.render('list', {title: title, tasks: workTasks});
-// });
-
-
-// app.get('/about', (req, res) => {
-//   res.render('about');
-// })
-
-
 app.post('/', (req, res) => {
   const newUserTask = new Task({
     task: req.body.task
@@ -141,15 +129,24 @@ app.get('/:listName', (req, res) => {
       }
     }
   });
-
 });
 
 
-// app.post('/work', (req, res) => {
-//   let task = req.body.task;
-//   workTasks.push(task);
-//   res.redirect('/work');
-// });
+app.post('/:listName', (req, res) => {
+  const listName = req.params.listName;
+
+  const task = new Task({
+    task: req.body.task
+  });
+
+  List.findOne({name: listName}, async (err, doc) => {
+    if (!err) {
+      doc.tasks.push(task);
+      await doc.save();
+      res.redirect(`/${listName}`);
+    }
+  });
+});
 
 
 app.listen(port, (err) => {
