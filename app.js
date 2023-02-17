@@ -53,12 +53,9 @@ const task3 = new Task({
   task: 'Play Hogwarts Legacy'
 });
 
+// place task documents in array
 const defaultTasks = [task1, task2, task3];
 
-// No longer want to add the documents to the database again
-// Task.create(defaultTasks, (err) => {
-//   err ? console.warn(err) : console.log('succesfully updated tasks collection');
-// });
 
 app.get('/', (req, res) => {
 
@@ -67,8 +64,16 @@ app.get('/', (req, res) => {
 
   // fetch task documents from todolistDB
   Task.find({}, (err, docs) => {
-    // pass title and docs to list.ejs to render
-    res.render('list', {title: title, tasks: docs});
+
+    if (docs.length === 0) {
+      // insert deafult tasks to db if empty
+      Task.insertMany(defaultTasks, (err) => {
+        err ? console.error(err) : res.redirect('/');
+      });
+    } else {
+      res.render('list', {title: title, tasks: docs});
+    }
+
   });
 
 });
