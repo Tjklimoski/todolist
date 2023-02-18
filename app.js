@@ -1,17 +1,15 @@
-// setup express
+
 import express from 'express';
+import * as date from './date.js';
+import mongoose from 'mongoose';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import _ from 'lodash';
+
+// setup express
 const app = express();
 const port = process.env.PORT || 3000;
 
-// import date module
-import * as date from './date.js';
-
-// import Mongoose
-import mongoose from 'mongoose';
-
-// create __filename and __dirname variables
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
