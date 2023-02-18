@@ -118,7 +118,7 @@ app.post('/deleteItem', async (req, res) => {
 
 
 app.get('/:listName', (req, res) => {
-  const listName = req.params.listName;
+  const listName = _.capitalize(req.params.listName);
 
   List.findOne({name: listName}, (err, doc) => {
     if (!err) {
