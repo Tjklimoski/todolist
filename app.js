@@ -101,10 +101,21 @@ app.post('/', (req, res) => {
 
 app.post('/deleteItem', async (req, res) => {
   const checkedTaskId = req.body.checkbox;
+  const listName = req.body.listName;
 
-  await Task.findByIdAndRemove(checkedTaskId);
-
-  res.redirect('/');
+  if (listName === date.getDate()) {
+    await Task.findByIdAndRemove(checkedTaskId);
+    res.redirect('/');
+  } else {
+    List.findOneAndUpdate(
+      {name: listName},
+      {$pull: {tasks: {_id: checkedTaskId}}},
+      (err, results) => {
+        err ? console.error(err) : res.redirect(`/${listName}`);
+      }
+    );
+  }
+  
 });
 
 
