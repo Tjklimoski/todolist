@@ -47,7 +47,7 @@ const Task = todolistDB.model('Task', taskSchema);
 // Create model for lists
 const List = todolistDB.model('List', listSchema);
 
-// create 3 new task documents
+// create 3 new task documents, place in array
 const task1 = new Task({
   task: 'Do taxes'
 });
@@ -60,7 +60,6 @@ const task3 = new Task({
   task: 'Play Hogwarts Legacy'
 });
 
-// place task documents in array
 const defaultTasks = [task1, task2, task3];
 
 
@@ -86,25 +85,30 @@ app.get('/', (req, res) => {
 });
 
 
-app.post('/', (req, res) => {
+app.post('/', async (req, res) => {
+  // Create a new task based on user input, add to db
   const newUserTask = new Task({
     task: req.body.task
   });
   
-  newUserTask.save();
+  await newUserTask.save();
 
+  // To render the newly added content
   res.redirect('/');
 });
 
 
 app.post('/deleteItem', async (req, res) => {
   const checkedTaskId = req.body.checkbox;
+  // from input type hidden on ejs file:
   const listName = req.body.listName;
 
+  // check if delete is on a custom list or the default list
   if (listName === date.getDate()) {
     await Task.findByIdAndRemove(checkedTaskId);
     res.redirect('/');
   } else {
+    // To remove the embedded task document from the tasks array
     List.findOneAndUpdate(
       {name: listName},
       {$pull: {tasks: {_id: checkedTaskId}}},
@@ -113,16 +117,17 @@ app.post('/deleteItem', async (req, res) => {
       }
     );
   }
-  
 });
 
 
 app.route('/:listName')
   .get((req, res) => {
+    // To stop dupliacte documents based on capitalization
     const listName = _.capitalize(req.params.listName);
 
     List.findOne({name: listName}, async (err, doc) => {
       if (!err) {
+        // Create a new list document if there isn't one
         if (!doc) {
           const list = new List({
             name: listName,
@@ -132,15 +137,15 @@ app.route('/:listName')
           await list.save();
 
           res.redirect(`/${listName}`);
+        // render list document if there IS one
         } else {
-          const tasks = doc.tasks;
-          const title = doc.name;
-          res.render('list', {title: title, tasks: tasks});
+          res.render('list', {title: doc.name, tasks: doc.tasks});
         }
       }
     });
   })
   .post((req, res) => {
+    // create new task document from user input on custom list
     const listName = req.params.listName;
 
     const task = new Task({
@@ -149,8 +154,10 @@ app.route('/:listName')
 
     List.findOne({name: listName}, async (err, doc) => {
       if (!err) {
+        // Add task document to tasks array, inside list document
         doc.tasks.push(task);
         await doc.save();
+        // To render new content
         res.redirect(`/${listName}`);
       }
     });
