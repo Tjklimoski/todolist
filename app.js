@@ -117,45 +117,44 @@ app.post('/deleteItem', async (req, res) => {
 });
 
 
-app.get('/:listName', (req, res) => {
-  const listName = _.capitalize(req.params.listName);
+app.route('/:listName')
+  .get((req, res) => {
+    const listName = _.capitalize(req.params.listName);
 
-  List.findOne({name: listName}, (err, doc) => {
-    if (!err) {
-      if (!doc) {
-        const list = new List({
-          name: listName,
-          tasks: defaultTasks
-        });
+    List.findOne({name: listName}, async (err, doc) => {
+      if (!err) {
+        if (!doc) {
+          const list = new List({
+            name: listName,
+            tasks: defaultTasks
+          });
 
-        list.save();
+          await list.save();
 
-        res.redirect(`/${listName}`);
-      } else {
-        const tasks = doc.tasks;
-        const title = doc.name;
-        res.render('list', {title: title, tasks: tasks});
+          res.redirect(`/${listName}`);
+        } else {
+          const tasks = doc.tasks;
+          const title = doc.name;
+          res.render('list', {title: title, tasks: tasks});
+        }
       }
-    }
+    });
+  })
+  .post((req, res) => {
+    const listName = req.params.listName;
+
+    const task = new Task({
+      task: req.body.task
+    });
+
+    List.findOne({name: listName}, async (err, doc) => {
+      if (!err) {
+        doc.tasks.push(task);
+        await doc.save();
+        res.redirect(`/${listName}`);
+      }
+    });
   });
-});
-
-
-app.post('/:listName', (req, res) => {
-  const listName = req.params.listName;
-
-  const task = new Task({
-    task: req.body.task
-  });
-
-  List.findOne({name: listName}, async (err, doc) => {
-    if (!err) {
-      doc.tasks.push(task);
-      await doc.save();
-      res.redirect(`/${listName}`);
-    }
-  });
-});
 
 
 app.listen(port, (err) => {
