@@ -25,7 +25,7 @@ app.use(express.urlencoded({extended: true}));
 // Setup mongoose connection to database
 // mongoose depreication warning
 mongoose.set('strictQuery', false);
-const todolistDB = mongoose.createConnection('mongodb://127.0.0.1:27017/todolistDB');
+const todolistDB = mongoose.createConnection('mongodb+srv://admin-tjk:4sxRV9aIKewVjI4J@learning.pp2n17d.mongodb.net/todolistDB');
 
 // Create mongoose schema for tasks
 const taskSchema = new mongoose.Schema({
